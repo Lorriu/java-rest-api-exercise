@@ -83,5 +83,14 @@ public class IOU {
         this.dateTime = dateTime;
     }
 
-
+    @Override
+    public String toString() {
+        return "{" +
+                "id:" + id +
+                ", borrower:'" + borrower + 
+                ", lender:'" + lender +
+                ", amount:" + amount +
+                ", dateTime:" + dateTime +
+                "}";
+    }
 }
