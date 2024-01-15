@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class IOU {
 
-    private final UUID id;
+    private UUID id;
     private String borrower;
     private String lender;
     private BigDecimal amount;
@@ -24,7 +24,6 @@ public class IOU {
         this.dateTime = dateTime;
 
     }
-
 
 
     //get unique identifier for the IOU
@@ -58,27 +57,31 @@ public class IOU {
     }
 
     
+    //set ID
+    public void setId(UUID id) {
+        this.id = id;
+    }
     
     //set name of borrower
-    public void getBorrower(String borrower){
+    public void setBorrower(String borrower){
 
         this.borrower = borrower;
     }
 
     //set name of lender
-    public void getLender(String lender){
+    public void setLender(String lender){
 
         this.lender = lender;
     }
 
     //set amount covered by IOU
-    public void getAmount(BigDecimal amount){
+    public void setAmount(BigDecimal amount){
 
         this.amount = amount;
     }
 
     //set date and time of IOU being issued
-    public void getDateTime(Instant dateTime){
+    public void setDateTime(Instant dateTime){
 
         this.dateTime = dateTime;
     }
