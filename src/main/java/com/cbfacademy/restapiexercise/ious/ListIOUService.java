@@ -49,6 +49,7 @@ public class ListIOUService implements IOUService {
             return iouRepository.create(iou);
         } catch (IllegalArgumentException | PersistenceException e) {
             // Handle exception or return null
+            e.getMessage();
             return null;
         }
     }

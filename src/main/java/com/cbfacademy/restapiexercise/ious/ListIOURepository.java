@@ -47,7 +47,6 @@ public class ListIOURepository implements IOURepository {
         } catch(Exception e){
 
             e.getMessage();
-            e.getStackTrace();
          }
         return entity;
     }
@@ -69,7 +68,6 @@ public class ListIOURepository implements IOURepository {
         } catch(Exception e){
 
             e.getMessage();
-            e.getStackTrace();
          }
     }
 
