@@ -26,6 +26,7 @@ public class ListIOUService implements IOUService {
             return iouRepository.retrieveAll();
         } catch (PersistenceException e) {
             // Handle exception or return an empty list
+            e.getMessage();
             return new ArrayList<>();
         }
     }
@@ -36,9 +37,11 @@ public class ListIOUService implements IOUService {
             return iouRepository.retrieve(id);
         } catch (IllegalArgumentException e) {
             // Handle exception or return null if not found
+            e.getMessage();
             return null;
         } catch (Exception e) {
             // Handle other exceptions
+            e.getMessage();
             return null;
         }
     }
@@ -60,6 +63,7 @@ public class ListIOUService implements IOUService {
             return iouRepository.update(updatedIOU);
         } catch (IllegalArgumentException | PersistenceException e) {
             // Handle exception or return null
+            e.getMessage();
             return null;
         }
     }
