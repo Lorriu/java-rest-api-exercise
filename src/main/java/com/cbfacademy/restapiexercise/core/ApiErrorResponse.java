@@ -10,11 +10,11 @@ public class ApiErrorResponse extends Object{
     private List<String> errors;
     private String message;
 
-    ApiErrorResponse(){
+    public ApiErrorResponse(){
 
     }
 
-    ApiErrorResponse(List<String> errors) {
+    public ApiErrorResponse(List<String> errors) {
         
         this.errors = errors;
     }
@@ -29,6 +29,10 @@ public class ApiErrorResponse extends Object{
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public List<String> getError() {
+        return errors;
     }
 
 
