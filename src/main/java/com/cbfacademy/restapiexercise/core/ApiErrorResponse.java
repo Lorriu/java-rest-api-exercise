@@ -35,6 +35,11 @@ public class ApiErrorResponse extends Object{
         return errors;
     }
 
+    public void setError(List<String> errors) {
+        
+        this.errors = errors;
+    }
+
 
 }
 
