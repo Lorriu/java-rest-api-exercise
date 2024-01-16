@@ -1,7 +1,6 @@
 package com.cbfacademy.restapiexercise.ious;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,11 +53,12 @@ public class IOUController {
         try {
 
             IOU iou = iouService.getIOU(id);
-            return ResponseEntity.ok(iou);
+            return ResponseEntity.ok().body(iou);
 
         } catch (IOUNotFoundException e) {
 
-            return ResponseEntity.notFound().build();
+            //return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             
         }
        
@@ -70,12 +70,14 @@ public class IOUController {
     public ResponseEntity<IOU> createIOU(@RequestBody IOU iou) {
        
         try {
-        IOU created = iouService.createIOU(iou);
-        URI endpoint = ServletUriComponentsBuilder.fromCurrentRequest()
+
+            IOU created = iouService.createIOU(iou);
+            URI endpoint = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(created.getId())
                 .toUri();
         return ResponseEntity.created(endpoint).body(created);
+
         } catch (IOUNotFoundException e) {
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -87,31 +89,16 @@ public class IOUController {
     // Extracting the ID from the URI path and updating the corresponding IOU
     public ResponseEntity<IOU> updateIOU(@PathVariable UUID id, @RequestBody IOU updatedIOU) {
         
-        //ERROR with line 77!!
-       // IOU updated = iouService.updateIOU(id, updatedIOU);
-
-        //Optional<IOU> updatedOptional = Optional.ofNullable(updated);
-
-
-       // return updated
-                //.map(value -> ResponseEntity.ok().body(value))
-               // .orElseGet(() -> {
-                  //  IOU created = iouService.createIOU(updatedIOU);
-                 //   URI endpoint = ServletUriComponentsBuilder.fromCurrentRequest()
-                       //     .path("/{id}")
-                       //     .buildAndExpand(created.getId())
-                        //    .toUri();
-                  //  return ResponseEntity.created(endpoint).body(created);
-              //  });
             try {
                 
-                IOU updated = iouService.updateIOU(id, updatedIOU);
-
-                return ResponseEntity.ok().body(updated);
+                updatedIOU.setId(id); // Ensure the ID is set to the correct value
+                
+                return new ResponseEntity<>(iouService.updateIOU(id, updatedIOU), HttpStatus.OK);
 
             } catch (IOUNotFoundException e) {
-                
-                return ResponseEntity.notFound().build();
+
+                //return ResponseEntity.notFound().build();
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
                
     }
@@ -122,13 +109,16 @@ public class IOUController {
     public ResponseEntity<IOU> deleteIOU(@PathVariable UUID id) {
 
         try {
+
             iouService.deleteIOU(id);
+
             return ResponseEntity.noContent().build();
 
         } catch (IOUNotFoundException e) {
 
             e.getMessage();
-            return ResponseEntity.notFound().build();
+            //return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
         }
     }
