@@ -40,6 +40,9 @@ public class ApiErrorResponse extends Object{
         this.errors = errors;
     }
 
-
+     /*need to fix this method to do whats needed based on test?
+     public String getBody() {
+        return getMessage();
+    } */
 }
 

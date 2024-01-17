@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ import java.net.URI;
 @RestController
 //create global exception
 @ControllerAdvice
+@ResponseStatus
 //base URI path for mappings
 @RequestMapping("/api/ious")
 public class IOUController {
@@ -58,6 +60,7 @@ public class IOUController {
         } catch (IOUNotFoundException e) {
 
             //return ResponseEntity.notFound().build();
+            e.getMessage();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             
         }
@@ -80,7 +83,8 @@ public class IOUController {
 
         } catch (IOUNotFoundException e) {
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            e.getMessage();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
@@ -98,6 +102,7 @@ public class IOUController {
             } catch (IOUNotFoundException e) {
 
                 //return ResponseEntity.notFound().build();
+                e.getMessage();
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
                
